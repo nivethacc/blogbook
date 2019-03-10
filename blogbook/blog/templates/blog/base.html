@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+     <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    {% if title %}
+    <title>BlogBook - Go Blogging!!!</title>
+    {% else %}
+     <title>Let's Learn Japanese Together!!!</title>
+    {% endif %}
+</head>
+
+<header class="site-header">
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <div class="container">
+        <IMG SRC="{% static 'blog/nb_logo.PNG' %}" ALT="some text" WIDTH=60 HEIGHT=40>
+      <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">日本語～学ぼう</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          <a class="nav-item nav-link" href="{% url 'blog-home' %}"><i class='fa fa-comments'></i>Blog</a>
+          <!--<a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>-->
+        </div>
+        <!-- Navbar Right Side -->
+        <div class="navbar-nav">
+            {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'post-create' %}"><i class='fa fa-edit'></i>New Post</a>
+            <a class="nav-item nav-link" href="{% url 'profile' %}"><i class='fa fa-user-circle'></i>Profile</a>
+                <a class="nav-item nav-link" href="{% url 'logout' %}"><i class='fa fa-sign-out'></i>Logout</a>
+            {% else %}
+                <a class="nav-item nav-link" href="{% url 'login' %}"><i class='fa fa-sign-in'></i>Login</a>
+                <a class="nav-item nav-link" href="{% url 'register' %}"><i class='fa fa-user-plus'></i>Register</a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<body>
+
+    <main role="main" class="container">
+  <div class="row">
+    <div class="col-md-7">
+        {% if messages %}
+         {% for message in messages %}
+        <div class="alert alert-{{ message.tags}}">
+            {{ message }}
+        </div>
+         {% endfor %}
+        {% endif %}
+      {% block content %}{% endblock %}
+    </div>
+    <div class="col-md-5">
+      <div class="content-section">
+        <h3 align="center" style="	font-weight: normal;font-family: 'Scada', sans-serif;color:#061a66e8;">無料登録</h3>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-light" style="color:#77687d;background-color:#e2dfe3;"><i class="fa fa-star"></i> 登録してブログで日本語を教えましょう！</li>
+            <li class="list-group-item list-group-item-light" style="color:#77687d;background-color:#e2dfe3;"><i class="fa fa-star"></i> 登録無しでもブログから学びましょう！</li>
+            <li class="list-group-item list-group-item-light" style="color:#77687d;background-color:#e2dfe3;"><i class="fa fa-star"></i> 質問しましょう！！！答えましょう！</li>
+              <li class="list-group-item list-group-item-light" style="color:#77687d;background-color:#e2dfe3;"><i class="fa fa-star"></i> 色々ことについて話しましょう！</li>
+            <li class="list-group-item list-group-item-light" style="color:#77687d;background-color:#e2dfe3;"><i class="fa fa-star"></i> 情報をやり取りしましょう！</li>
+          </ul>
+          <div>
+              <br/>
+              <h5 align="center" style="font-weight: normal;font-family: 'Scada', sans-serif;color:#1d2d39">みんなで日本語を学びましょう！</h5>
+             <h5 align="center" style="font-weight: normal;font-family: 'Scada', sans-serif;color:#1d2d39">日本語学ぼうで学びましょう！</h5>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+ <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
